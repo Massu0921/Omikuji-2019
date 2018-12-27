@@ -37,7 +37,7 @@ class LED(object):      # LED表示器用
             self.canvas.Clear()
             self.canvas.SetImage(result,self.pos_x,0)
             self.canvas = self.matrix.SwapOnVSync(self.canvas)
-            if self.pos_x <= -(self._width):
+            if self.pos_x <= 0:
                 break
             self.pos_x -= 1
             time.sleep(0.01)
