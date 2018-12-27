@@ -56,7 +56,7 @@ class LED(object):      # LED表示器用
             self.canvas = self.matrix.SwapOnVSync(self.canvas)
             self.pos_x -= 4
 
-        if -(self.pos_x) >= data['cnt']:
+        if -(self.pos_x) >= data['cnt'] and self.flg:
             self.flg = False
             self.result()
 
