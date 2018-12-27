@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
-import re
+import random
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from PIL import Image, ImageDraw, ImageSequence
 
@@ -28,6 +28,22 @@ class LED(object):      # LED表示器用
 
         self.pos_x = self._width
 
+    def result(self):
+        num = random.randrange(7)
+        result = Image.open('static/images/' + str(num) + '.png').convert('RGB')
+        result = result.resize(self._width,self._height)
+        self.pos_x = self._width
+        while 1:
+            self.canvas.Clear()
+            self.canvas.SetImage(result,self.pos_x,0)
+            self.canvas = self.matrix.SwapOnVSync(self.canvas)
+            if self.pos_x <= -(self._width):
+                break
+            self.pos_x -= 1
+
+        
+        
+        
     # 表示
     def display(self,data):
         self.canvas.Clear()
@@ -36,6 +52,8 @@ class LED(object):      # LED表示器用
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
         self.pos_x -= 4
 
+        if -(self.pos_x) >= data['cnt']:
+            self.result()
 
     # 表示初期化
     def clear(self):
