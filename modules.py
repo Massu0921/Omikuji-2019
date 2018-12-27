@@ -31,7 +31,7 @@ class LED(object):      # LED表示器用
     # 表示
     def display(self,data):
         self.canvas.Clear()
-        omikuji = Image.open('/static/images/omikuji.png').convert('RGB')
+        omikuji = Image.open('static/images/omikuji.png').convert('RGB')
         self.canvas.SetImage(omikuji,self.pos_x,0)
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
         self.pos_x -= 4
