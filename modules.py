@@ -26,9 +26,12 @@ class LED(object):      # LED表示器用
         self._width = self.canvas.width
         self._height = self.canvas.height
 
+        # スクロール x座標
         self.pos_x = self._width
-
+        # 振る動作が完了したかどうか
         self.flg = True
+        # 結果が出たかどうか
+        self.res_flg = False
 
     def result(self):
         num = random.randrange(7)
@@ -42,7 +45,8 @@ class LED(object):      # LED表示器用
             self.canvas.Clear()
             self.canvas.SetImage(result,self.pos_x,0)
             self.canvas = self.matrix.SwapOnVSync(self.canvas)
-            if self.pos_x <= 0:
+            if self.pos_x <= 0: # 結果出力完了(ページ遷移させる)
+                self.res_flg = True
                 break
             self.pos_x -= 1
             time.sleep(0.01)
