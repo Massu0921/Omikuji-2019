@@ -21,6 +21,17 @@ def index():
     """
     return render_template('index.html')
 
+@app.route('/omikuji')
+def omikuji():
+    global led
+    return render_template('omikuji.html')
+
+@app.route('/send',methods=['GET','POST'])
+def display():
+    data = request.json
+    app.logger.debug(data)
+    return ''
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000, threaded=True)
