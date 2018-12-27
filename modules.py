@@ -28,11 +28,16 @@ class LED(object):      # LED表示器用
 
         self.pos_x = self._width
 
+        self.flg = True
+
     def result(self):
         num = random.randrange(7)
         result = Image.open('static/images/' + str(num) + '.png').convert('RGB')
         result = result.resize((self._width,self._height))
-        self.clear()
+        self.pos_x = self._width
+        self.canvas.Clear()
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
+
         while 1:
             self.canvas.Clear()
             self.canvas.SetImage(result,self.pos_x,0)
@@ -44,17 +49,20 @@ class LED(object):      # LED表示器用
         
     # 表示
     def display(self,data):
-        self.canvas.Clear()
-        omikuji = Image.open('static/images/omikuji.png').convert('RGB')
-        self.canvas.SetImage(omikuji,self.pos_x,0)
-        self.canvas = self.matrix.SwapOnVSync(self.canvas)
-        self.pos_x -= 4
+        if self.flg:
+            self.canvas.Clear()
+            omikuji = Image.open('static/images/omikuji.png').convert('RGB')
+            self.canvas.SetImage(omikuji,self.pos_x,0)
+            self.canvas = self.matrix.SwapOnVSync(self.canvas)
+            self.pos_x -= 4
 
         if -(self.pos_x) >= data['cnt']:
+            self.flg = False
             self.result()
 
     # 表示初期化
     def clear(self):
+        self.flg = True
         self.pos_x = self._width
         self.canvas.Clear()
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
