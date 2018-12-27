@@ -32,7 +32,7 @@ class LED(object):      # LED表示器用
         num = random.randrange(7)
         result = Image.open('static/images/' + str(num) + '.png').convert('RGB')
         result = result.resize((self._width,self._height))
-        self.pos_x = self._width
+        self.clear()
         while 1:
             self.canvas.Clear()
             self.canvas.SetImage(result,self.pos_x,0)
@@ -40,6 +40,7 @@ class LED(object):      # LED表示器用
             if self.pos_x <= -(self._width):
                 break
             self.pos_x -= 1
+            time.sleep(0.01)
         
     # 表示
     def display(self,data):
