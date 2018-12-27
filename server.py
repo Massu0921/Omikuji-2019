@@ -34,6 +34,7 @@ def display():
     led.display(data)
     if led.res_flg:  # 結果が出力済みの場合
         led.res_flg = False  # 初期化
+        print('okok')
         return render_template('result.html')
     else:
         return ''
