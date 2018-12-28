@@ -32,6 +32,7 @@ function motion(event) {
   const z = event.acceleration.z;
 
   const bound = 7;
+  // 上下のみカウント
   if (x > bound) { // 右
     omikuji_img.style.transform = 'rotate(90deg)';
   }
